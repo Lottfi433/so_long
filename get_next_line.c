@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:02:21 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/05 12:48:36 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/06 14:48:26 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ char	*before_newline(char *str)
 		return (NULL);
 	while (str[i] != '\0' && str[i] != '\n')
 		i++;
-	if (str[i] == '\n')
-		i++;
 	n_str = malloc(i + 1);
 	if (n_str == NULL)
 		return (NULL);
@@ -35,8 +33,6 @@ char	*before_newline(char *str)
 		n_str[i] = str[i];
 		i++;
 	}
-	if (str[i] == '\n')
-		n_str[i++] = '\n';
 	n_str[i] = '\0';
 	return (n_str);
 }
@@ -121,13 +117,11 @@ int	count_lines(char *filename)
 	}
 	return (x);
 }
-#include <fcntl.h>
-#include <stdio.h>
 
-int main ()
-{
-	printf("%d", count_lines("map.ber"));
-}
+// int main ()
+// {
+// 	printf("%d", count_lines("map.ber"));
+// }
 // int main ()
 // {
 // 	int fd = open ("map.ber", O_RDWR);

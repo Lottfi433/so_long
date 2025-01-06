@@ -1,0 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   walls.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 15:38:48 by yasserlotfi       #+#    #+#             */
+/*   Updated: 2025/01/06 15:39:49 by yasserlotfi      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+
+int	one_checker(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != '1')
+			return(0);
+		i++;
+	}
+	return (1);
+}
+
+int	one_checker2(char **hold, int lines)
+{
+	int	i;
+	int	str_len;
+
+	i = 0;
+	while (i < lines)
+	{
+		str_len = ft_strlen(hold[i]);
+		if (hold[i][0] != '1' || hold[i][str_len - 1] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+int	map_checker(char *mapname)
+{
+	int	lines;
+	int	i;
+	int	fd;
+	char	**hold;
+
+	lines = count_lines(mapname);
+	fd = open (mapname, O_RDWR);
+	i = 0;
+	hold = malloc (lines);
+	if (hold == NULL)
+		return (0);
+	while (i < lines)
+	{
+		hold[i] = get_next_line(fd);
+		i++;
+	}
+	i = 0;
+	printf("%d\n", one_checker2(hold, lines));
+	if (one_checker(hold[lines - 1]) == 1 && one_checker(hold[0]) == 1 && one_checker2(hold, lines) == 1)
+		return (1);
+	return(0);
+}
+int main ()
+{
+	printf ("%d",map_checker("map.ber"));
+}
