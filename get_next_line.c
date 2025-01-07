@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:02:21 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/06 14:48:26 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/07 09:56:21 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	count_chars(char *filename)
 	char	buffer[1024];
 
 	fd = open ("map.ber", O_RDONLY);
+	if (fd < 0)
+		return (0);
 	byte_r = 1;
 	char_num = 0;
 	while (byte_r >= 1)
@@ -104,11 +106,13 @@ int	count_lines(char *filename)
 	char	buffer[count_chars(filename)];
 	int		i;
 	int		x;
-
+	int		byte_read;
 	fd = open ("map.ber", O_RDONLY);
 	i = 0;
 	x = 1;
-	read(fd, buffer, count_chars(filename));
+	byte_read = read(fd, buffer, count_chars(filename));
+	if (byte_read <= 0)
+		return (0);
 	while (buffer[i] != '\0')
 	{
 		if (buffer[i] == '\n')
