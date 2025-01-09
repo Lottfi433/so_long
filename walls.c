@@ -6,16 +6,12 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:38:48 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/07 10:01:02 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/09 10:52:20 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
-void	function()
-{
-	system("leaks a.out");
-}
 int	one_checker(char *str)
 {
 	int	i;
@@ -24,7 +20,7 @@ int	one_checker(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] != '1')
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);
@@ -46,7 +42,7 @@ int	one_checker2(char **hold, int lines)
 	return (1);
 }
 
-void memmory_free(char **hold, int lines)
+void	memmory_free(char **hold, int lines)
 {
 	int	i;
 
@@ -58,11 +54,12 @@ void memmory_free(char **hold, int lines)
 	}
 	free(hold);
 }
+
 int	map_checker(char *mapname)
 {
-	int	lines;
-	int	i;
-	int	fd;
+	int		lines;
+	int		i;
+	int		fd;
 	char	**hold;
 
 	lines = count_lines(mapname);
@@ -77,18 +74,24 @@ int	map_checker(char *mapname)
 	{
 		hold[i] = get_next_line(fd);
 		if (hold[i] == NULL)
-		{
 			memmory_free(hold, i);
-			close(fd);
-		}
 		i++;
 	}
-	function();
-	if (lines > 1 && one_checker(hold[lines - 1]) == 1 && one_checker(hold[0]) == 1 && one_checker2(hold, lines) == 1)
+	if (lines > 2 && one_checker(hold[lines - 1]) == 1
+		&& one_checker(hold[0]) == 1 && one_checker2(hold, lines) == 1)
 		return (1);
-	return(0);
+	close(fd);
+	return (0);
 }
+
 int main ()
 {
-	printf ("%d",map_checker("map.ber"));
+	char **hold;
+	hold = map_two_d(hold, "map.ber");
+	int	i;
+	int	j;
+
+	i = player_position_i(hold, "map.ber");
+	j = player_position_j(hold, "map.ber");
+	printf ("%d",last_map_checking (flood(hold,i ,j), "map.ber"));
 }

@@ -6,11 +6,11 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:04:37 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/05 11:08:50 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/08 10:07:51 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 int	ft_strlen(char *str)
 {

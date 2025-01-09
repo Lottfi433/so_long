@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   so_long_untils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 11:54:05 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/07 11:54:09 by yasserlotfi      ###   ########.fr       */
+/*   Created: 2025/01/09 09:29:59 by yasserlotfi       #+#    #+#             */
+/*   Updated: 2025/01/09 10:50:06 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "mlx.h"
+#include "so_long.h"
 
-// int main(void)
-// {
-//     void    *mlx;
-//     void    *mlx_win;
+int	last_map_checking(char **hold, char *mapname)
+{
+	int	i;
+	int	j;
 
-//     mlx = mlx_init();
-//     mlx_win = mlx_new_window(mlx, 800, 600, "Hello world!");
-//     (void)mlx_win;  // Suppresses the unused variable warning
-
-//     mlx_loop(mlx);  // Keeps the window open and listens for events
-//     return (0);
-// }
+	i = 0;
+	if (map_checker(mapname) == 1)
+	{
+		while (i < count_lines(mapname))
+		{
+			j = 0;
+			while (hold[i][j] != '\0')
+			{
+				if (hold[i][j] != '1' && hold [i][j] != '*')
+					return (0);
+				j++;
+			}
+			i++;
+		}
+		return (1);
+	}
+	return (0);
+}

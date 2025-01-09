@@ -6,13 +6,11 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:02:21 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/07 09:56:21 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/08 10:59:53 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-#include "get_next_line.h"
+#include "so_long.h"
 
 char	*before_newline(char *str)
 {
@@ -100,25 +98,33 @@ int	count_chars(char *filename)
 	}
 	return (char_num);
 }
+
 int	count_lines(char *filename)
 {
 	int		fd;
-	char	buffer[count_chars(filename)];
+	char	*buffer;
 	int		i;
 	int		x;
 	int		byte_read;
+
+	buffer = malloc (count_chars(filename));
+	if (buffer == NULL)
+		return (0);
 	fd = open ("map.ber", O_RDONLY);
 	i = 0;
 	x = 1;
 	byte_read = read(fd, buffer, count_chars(filename));
 	if (byte_read <= 0)
+	{
+		free (buffer);
 		return (0);
+	}
 	while (buffer[i] != '\0')
 	{
-		if (buffer[i] == '\n')
+		if (buffer[i++] == '\n')
 			x += 1;
-		i++;
 	}
+	free (buffer);
 	return (x);
 }
 
