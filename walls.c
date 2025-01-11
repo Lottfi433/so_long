@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:38:48 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/09 10:52:20 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/11 10:08:41 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,15 @@ int	map_checker(char *mapname)
 	return (0);
 }
 
-int main ()
+int	parsing(char **hold)
 {
-	char **hold;
-	hold = map_two_d(hold, "map.ber");
 	int	i;
 	int	j;
 
 	i = player_position_i(hold, "map.ber");
 	j = player_position_j(hold, "map.ber");
-	printf ("%d",last_map_checking (flood(hold,i ,j), "map.ber"));
+	if (starting_ending_colect_checker(hold, "map.ber") == 1
+		&& last_map_checking(flood(hold, i, j), "map.ber") == 1)
+		return (1);
+	return (0);
 }

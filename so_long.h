@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:03:01 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/09 09:47:25 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/11 10:15:59 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include "mlx.h"
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
@@ -38,4 +39,5 @@ int		player_position_j(char **hold, char *mapname);
 char	**flood(char **hold, int i, int j);
 int		last_map_checking(char **hold, char *mapname);
 int		map_checker(char *mapname);
+int		parsing(char **hold);
 #endif
