@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:54:05 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/11 10:26:00 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/11 11:15:53 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	main(void)
 {
 	char	**hold;
-	char	**copy;
+	// char	**copy;
 	void	*mlx;
 	void	*mlx_win;
 
 	hold = NULL;
 	hold = map_two_d(hold, "map.ber");
-	copy = map_two_d(hold, "map.ber");
+	// copy = map_two_d(hold, "map.ber");
 	if (parsing(hold) == 0)
 	{
 		write(1, "Fix your map", 12);
