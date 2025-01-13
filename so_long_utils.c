@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:08:54 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/11 09:35:02 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/13 10:37:53 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,22 @@ char	**map_two_d(char **hold, char *mapname) //this is for 2d array
 	fd = open (mapname, O_RDWR);
 	if (fd < 0)
 		return (0);
-	hold = malloc (lines * sizeof(char *));
+	hold = malloc (lines * sizeof(char *) + 1);
 	if (hold == NULL)
+	{
+		close (fd);
 		return (0);
+	}
 	i = 0;
 	while (i < lines)
 	{
 		hold[i] = get_next_line(fd);
 		if (hold[i] == NULL)
-			memmory_free(hold, i);
+			close (fd),memmory_free(hold, i);
 		i++;
 	}
+	hold[i] = NULL;
+	close(fd);
 	return (hold);
 }
 
@@ -65,7 +70,7 @@ int	starting_ending_colect_checker(char **hold, char *mapname)//P C E check
 	return (0);
 }
 
-int	player_position_i(char **hold, char *mapname)//to get P line
+int	player_position_i(char **hold, char *mapname, char c)//to get P line
 {
 	int	i;
 	int	j;
@@ -76,7 +81,7 @@ int	player_position_i(char **hold, char *mapname)//to get P line
 		j = 0;
 		while (hold[i][j] != '\0')
 		{
-			if (hold[i][j] == 'P')
+			if (hold[i][j] == c)
 				return (i);
 			j++;
 		}
@@ -85,7 +90,7 @@ int	player_position_i(char **hold, char *mapname)//to get P line
 	return (0);
 }
 
-int	player_position_j(char **hold, char *mapname)//to get P colone
+int	player_position_j(char **hold, char *mapname, char c)//to get P colone
 {
 	int	i;
 	int	j;
@@ -96,7 +101,7 @@ int	player_position_j(char **hold, char *mapname)//to get P colone
 		j = 0;
 		while (hold[i][j] != '\0')
 		{
-			if (hold[i][j] == 'P')
+			if (hold[i][j] == c)
 				return (j);
 			j++;
 		}

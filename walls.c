@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:38:48 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/11 10:08:41 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/11 13:25:53 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	parsing(char **hold)
 	int	i;
 	int	j;
 
-	i = player_position_i(hold, "map.ber");
-	j = player_position_j(hold, "map.ber");
+	i = player_position_i(hold, "map.ber", 'P');
+	j = player_position_j(hold, "map.ber", 'P');
 	if (starting_ending_colect_checker(hold, "map.ber") == 1
 		&& last_map_checking(flood(hold, i, j), "map.ber") == 1)
 		return (1);

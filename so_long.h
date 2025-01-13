@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:03:01 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/11 10:15:59 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/13 10:09:03 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 45
+# endif
+# ifndef TILE_SIZE
+#  define TILE_SIZE 40
 # endif
 # include <stdlib.h>
 # include <unistd.h>
@@ -34,8 +37,8 @@ int		count_lines(char *filename);
 char	**map_two_d(char **hold, char *mapname);
 void	memmory_free(char **hold, int lines);
 int		starting_ending_colect_checker(char **hold, char *mapname);
-int		player_position_i(char **hold, char *mapname);
-int		player_position_j(char **hold, char *mapname);
+int		player_position_i(char **hold, char *mapname, char c);
+int		player_position_j(char **hold, char *mapname, char c);
 char	**flood(char **hold, int i, int j);
 int		last_map_checking(char **hold, char *mapname);
 int		map_checker(char *mapname);
