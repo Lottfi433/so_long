@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:08:54 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/13 10:37:53 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/19 15:39:16 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,26 @@ char	**map_two_d(char **hold, char *mapname) //this is for 2d array
 	int	i;
 	int	fd;
 
-	lines = count_lines(mapname);
 	fd = open (mapname, O_RDWR);
 	if (fd < 0)
-		return (0);
+	{
+		write(1, "Map not found!", 14);
+		exit(0);
+		return (NULL);
+	}
+	lines = count_lines(mapname);
 	hold = malloc (lines * sizeof(char *) + 1);
 	if (hold == NULL)
-	{
-		close (fd);
 		return (0);
-	}
 	i = 0;
 	while (i < lines)
 	{
 		hold[i] = get_next_line(fd);
 		if (hold[i] == NULL)
-			close (fd),memmory_free(hold, i);
+			memmory_free(hold);
 		i++;
 	}
 	hold[i] = NULL;
-	close(fd);
 	return (hold);
 }
 

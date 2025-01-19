@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:02:21 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/11 09:48:39 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/19 15:35:55 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	count_chars(char *filename)
 		byte_r = read (fd, buffer, 1);
 		char_num += byte_r;
 	}
+	close (fd);
 	return (char_num);
 }
 
@@ -110,7 +111,7 @@ int	count_lines(char *filename)
 	buffer = malloc (count_chars(filename));
 	if (buffer == NULL)
 		return (0);
-	fd = open ("map.ber", O_RDONLY);
+	fd = open (filename, O_RDONLY);
 	i = 0;
 	x = 1;
 	byte_read = read(fd, buffer, count_chars(filename));
@@ -127,52 +128,3 @@ int	count_lines(char *filename)
 	free (buffer);
 	return (x);
 }
-
-// int main ()
-// {
-// 	printf("%d", count_lines("map.ber"));
-// }
-// int main ()
-// {
-// 	int fd = open ("map.ber", O_RDWR);
-// 	char	**buffer;
-// 	int		i;
-// 	int		x;
-
-// 	i = 0;
-// 	x = 0;
-// 	while (get_next_line(fd) != NULL)
-// 	{
-// 		i++;
-// 	}
-// 	buffer = malloc (i * (sizeof(char *)));
-// 	if (buffer == NULL)
-// 		return (NULL);
-// 	while (get_next_line(fd) != NULL)
-// 	{
-// 		buffer[x] = get_next_line(fd);
-// 		x++;
-// 	}
-// }
-
-// char test()
-// {
-// 	char	**buffer;
-// 	int		i;
-// 	int		x;
-
-// 	i = 0;
-// 	x = 0;
-// 	while (get_next_line(fd) != NULL)
-// 	{
-// 		i++;
-// 	}
-// 	buffer = malloc (i * (sizeof(char *)));
-// 	if (buffer == NULL)
-// 		return (NULL);
-// 	while (get_next_line(fd) != NULL)
-// 	{
-// 		buffer[x] = get_next_line(fd);
-// 		x++;
-// 	}
-// }
