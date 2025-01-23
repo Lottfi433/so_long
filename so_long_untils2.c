@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:29:59 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/19 14:49:31 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/22 09:21:15 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	last_map_checking(char **hold, char *mapname)
 			j = 0;
 			while (hold[i][j] != '\0')
 			{
-				if (hold[i][j] != '1' && hold [i][j] != '*'
-					&& hold[i][j] != '0')
+				if ((hold[i][j] != '1' && hold [i][j] != '*'
+					&& hold[i][j] != '0') || hold[i][j] == '\n')
 					return (0);
 				j++;
 			}

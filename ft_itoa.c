@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:47:57 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/16 12:19:37 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/23 09:49:30 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,12 @@ char	*ft_itoa(int n)
 		number = number / 10;
 	}
 	return (a);
+}
+
+void	main_helper(t_game *game)
+{
+	game->hold = map_two_d(game->hold, game->mapname);
+	game->copy = map_two_d(game->hold, game->mapname);
+	game->map_w = ft_strlen(game->hold[0]);
+	game->map_h = count_lines(game->mapname);
 }

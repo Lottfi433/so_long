@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:08:54 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/19 15:39:16 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/21 16:26:43 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	**map_two_d(char **hold, char *mapname) //this is for 2d array
 {
-	int	lines;
 	int	i;
 	int	fd;
 
@@ -23,18 +22,19 @@ char	**map_two_d(char **hold, char *mapname) //this is for 2d array
 	{
 		write(1, "Map not found!", 14);
 		exit(0);
-		return (NULL);
 	}
-	lines = count_lines(mapname);
-	hold = malloc (lines * sizeof(char *) + 1);
+	hold = malloc (count_lines(mapname) * sizeof(char *) + 1);
 	if (hold == NULL)
-		return (0);
+		return (NULL);
 	i = 0;
-	while (i < lines)
+	while (i < count_lines(mapname))
 	{
 		hold[i] = get_next_line(fd);
 		if (hold[i] == NULL)
-			memmory_free(hold);
+		{
+			memmory_free(hold, i);
+			return (NULL);
+		}
 		i++;
 	}
 	hold[i] = NULL;
@@ -75,6 +75,8 @@ int	player_position_i(char **hold, char *mapname, char c)//to get P line
 	int	i;
 	int	j;
 
+	if (hold == NULL)
+		return (0);
 	i = 0;
 	while (i < count_lines (mapname))
 	{
@@ -116,7 +118,8 @@ char	**flood(char **hold, int i, int j)
 		return (hold);
 	else if (hold[i][j] == 'E')
 		hold[i][j] = '*';
-	else if (hold[i][j] != '1' && hold[i][j] != '*')
+	else if (hold[i][j] == '0' || hold[i][j] == 'C' || hold[i][j] == 'E'
+			|| hold[i][j] == 'P')
 	{
 		hold[i][j] = '*';
 		flood(hold, i + 1, j);

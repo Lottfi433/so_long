@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:02:21 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/19 15:35:55 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/21 15:25:35 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*after_newline(char *str)
 		i++;
 	n_str = ft_strdup(&str[i]);
 	free (str);
+	str = NULL;
 	return (n_str);
 }
 
@@ -74,6 +75,7 @@ char	*get_next_line(int fd)
 		hold = ft_strjoin(hold, buffer);
 	}
 	free (buffer);
+	buffer = NULL;
 	line = before_newline(hold);
 	hold = after_newline(hold);
 	return (line);
@@ -96,6 +98,7 @@ int	count_chars(char *filename)
 		byte_r = read (fd, buffer, 1);
 		char_num += byte_r;
 	}
+	char_num += 1;
 	close (fd);
 	return (char_num);
 }
@@ -116,15 +119,14 @@ int	count_lines(char *filename)
 	x = 1;
 	byte_read = read(fd, buffer, count_chars(filename));
 	if (byte_read <= 0)
-	{
-		free (buffer);
-		return (0);
-	}
+		return (free(buffer), buffer = NULL, 0);
 	while (buffer[i] != '\0')
 	{
-		if (buffer[i++] == '\n' && buffer[i + 1] != '\0')
+		if (buffer[i] == '\n' && buffer[i + 1] != '\0')
 			x += 1;
+		i++;
 	}
 	free (buffer);
+	buffer = NULL;
 	return (x);
 }

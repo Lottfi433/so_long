@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:03:01 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/19 14:49:36 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/23 09:50:05 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*before_newline(char *str);
 int		count_chars(char *filename);
 int		count_lines(char *filename);
 char	**map_two_d(char **hold, char *mapname);
-void	memmory_free(char **hold);
+void	memmory_free(char **hold, int x);
 int		starting_ending_colect_checker(char **hold, char *mapname);
 int		player_position_i(char **hold, char *mapname, char c);
 int		player_position_j(char **hold, char *mapname, char c);
@@ -74,4 +74,6 @@ void	move_player(t_game *game, int dx, int dy);
 int		handle_keyboard(int key_code, t_game *game);
 void	get_player_position(t_game *game);
 char	**read_map(int fd, char *mapname);
+int		handle_close(t_game *game);
+void	main_helper(t_game *game);
 #endif

@@ -6,7 +6,7 @@
 /*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:54:05 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/19 14:58:44 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/23 09:49:04 by yasserlotfi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@ char	**read_map(int fd, char *mapname)
 {
 	int		i;
 	char	**hold;
+	int		lines;
 
-	hold = malloc (count_lines(mapname) * sizeof(char *));
+	lines = count_lines(mapname);
+	hold = malloc (lines * sizeof(char *));
 	if (hold == NULL)
-		return (0);
+		return (NULL);
 	i = 0;
-	while (i < count_lines(mapname))
+	while (i < lines)
 	{
 		hold[i] = get_next_line(fd);
 		if (hold[i] == NULL)
-			memmory_free(hold);
+		{
+			memmory_free(hold, i);
+			return (NULL);
+		}
 		i++;
 	}
 	return (hold);
@@ -33,18 +38,30 @@ char	**read_map(int fd, char *mapname)
 
 void	load_map_images(t_game *game)
 {
-	game->img_bg = mlx_xpm_file_to_image(game->mlx, "background.xpm",
+	game->img_bg = mlx_xpm_file_to_image(game->mlx, "textures/background.xpm",
 			&game->width, &game->height);
+	if (!game->img_bg)
+		exit (1);
 	game->mlx_win = mlx_new_window(game->mlx, game->map_w * TILE_SIZE,
-			game->map_h * TILE_SIZE, "Hello world!");
-	game->walls_img = mlx_xpm_file_to_image(game->mlx, "wallimg.xpm",
+			game->map_h * TILE_SIZE, "So_Long");
+	if (!game->mlx_win)
+		exit (1);
+	game->walls_img = mlx_xpm_file_to_image(game->mlx, "textures/wallimg.xpm",
 			&game->width, &game->height);
-	game->collect_img = mlx_xpm_file_to_image(game->mlx, "collect.xpm",
+	if (!game->walls_img)
+		exit (1);
+	game->collect_img = mlx_xpm_file_to_image(game->mlx, "textures/collect.xpm",
 			&game->width, &game->height);
-	game->player_img = mlx_xpm_file_to_image(game->mlx, "player.xpm",
+	if (!game->collect_img)
+		exit (1);
+	game->player_img = mlx_xpm_file_to_image(game->mlx, "textures/player.xpm",
 			&game->width, &game->height);
-	game->door_img = mlx_xpm_file_to_image(game->mlx, "door.xpm",
+	if (!game->player_img)
+		exit (1);
+	game->door_img = mlx_xpm_file_to_image(game->mlx, "textures/door.xpm",
 			&game->width, &game->height);
+	if (!game->door_img)
+		exit (1);
 }
 
 void	render_map(t_game *game)
@@ -94,24 +111,22 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		game = malloc (sizeof(t_game));
-		game->mapname = av[1];
-		game->hold = map_two_d(game->hold, game->mapname);
-		game->copy = map_two_d(game->hold, game->mapname);
-		game->map_w = ft_strlen(game->hold[0]);
-		game->map_h = count_lines(game->mapname);
-		if (parsing(game->hold, game->mapname) == 0)
-		{
-			write(1, "Fix your map", 12);
+		if (!game)
 			exit(0);
-		}
+		game->mapname = av[1];
+		main_helper(game);
+		if (parsing(game->hold, game->mapname) == 0)
+			exit(0);
 		game->mlx = mlx_init();
 		get_player_position(game);
 		load_map_images(game);
 		render_map(game);
 		mlx_hook(game->mlx_win, 2, 1L << 0, handle_keyboard, game);
+		mlx_hook(game->mlx_win, 17, 0, handle_close, game);
 		mlx_loop(game->mlx);
-		memmory_free(game->copy);
-		memmory_free(game->hold);
+		memmory_free(game->copy, count_lines(game->mapname));
+		memmory_free(game->hold, count_lines(game->mapname));
+		free(game);
 	}
 	write(1, "Wrong number of args !", 22);
 }
