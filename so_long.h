@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yazlaigi <yazlaigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:03:01 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/23 09:50:05 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/02/03 12:12:58 by yazlaigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include "mlx.h"
 
 typedef struct s_game
 {
 	char	**hold;
-	//char	**map;
 	char	**copy;
 	void	*mlx;
 	void	*mlx_win;
@@ -76,4 +74,6 @@ void	get_player_position(t_game *game);
 char	**read_map(int fd, char *mapname);
 int		handle_close(t_game *game);
 void	main_helper(t_game *game);
+void	main_helper2(t_game *game);
+void	print_moves(t_game *game);
 #endif

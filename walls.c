@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   walls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yazlaigi <yazlaigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:38:48 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/23 09:37:45 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/02/03 11:09:37 by yazlaigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,11 @@ int	map_checker(char *mapname)
 		&& count_lines(mapname) != ft_strlen(hold[0]))
 	{
 		memmory_free(hold, count_lines(mapname));
+		close (fd);
 		return (1);
 	}
 	memmory_free(hold, count_lines(mapname));
+	close (fd);
 	return (0);
 }
 
@@ -98,6 +100,7 @@ int	parsing(char **hold, char *mapname)
 	if (starting_ending_colect_checker(hold, mapname) == 1
 		&& last_map_checking(flood(hold, i, j), mapname) == 1)
 		return (1);
-	write(1, "Fix your map", 12);
+	write(2, "Fix your map", 12);
+	memmory_free(hold, count_lines(mapname));
 	return (0);
 }

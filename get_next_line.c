@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yazlaigi <yazlaigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:02:21 by yasserlotfi       #+#    #+#             */
-/*   Updated: 2025/01/21 15:25:35 by yasserlotfi      ###   ########.fr       */
+/*   Updated: 2025/01/23 11:33:06 by yazlaigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int	count_lines(char *filename)
 	byte_read = read(fd, buffer, count_chars(filename));
 	if (byte_read <= 0)
 		return (free(buffer), buffer = NULL, 0);
+	buffer[byte_read] = '\0';
 	while (buffer[i] != '\0')
 	{
 		if (buffer[i] == '\n' && buffer[i + 1] != '\0')
@@ -128,5 +129,5 @@ int	count_lines(char *filename)
 	}
 	free (buffer);
 	buffer = NULL;
-	return (x);
+	return (close (fd), x);
 }

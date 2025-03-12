@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yasserlotfi <yasserlotfi@student.42.fr>    +#+  +:+       +#+         #
+#    By: yazlaigi <yazlaigi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/03 11:08:57 by yasserlotfi       #+#    #+#              #
-#    Updated: 2025/01/15 17:32:41 by yasserlotfi      ###   ########.fr        #
+#    Updated: 2025/02/03 11:11:02 by yazlaigi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRC = main.c get_next_line_utils.c get_next_line.c so_long_untils2.c so_long_utils.c walls.c ft_itoa.c
 OBJ = $(SRC:.c=.o)
-MLX_DIR = /Users/yasserlotfi/Downloads/minilibx_opengl_20191021
+MLX_DIR = /Users/yazlaigi/Desktop/minilibx_opengl_20191021
 MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-%.o: %.c
+%.o: %.c so_long.h
 	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
 
 $(NAME): $(OBJ)
